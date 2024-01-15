@@ -2,9 +2,12 @@
 import {useProjectStore} from "~/stores/project";
 
 export default defineNuxtPlugin(async (nuxtApp) => {
-    const projectID = nuxtApp.$config.public.projectID
+
+    // get url of current page in ssr
+    // @ts-ignore
+    let project = useRequestURL().origin
+    // now get from project only subodmain
+    project = project.split('.')[0].split('//')[1]
     const store = useProjectStore()
-    // fetch https://api.mojshop.net/api/projects/1 using useFetch
-    await store.getProjectData(projectID)
-    // set app title to project name
+    await store.getProjectData(project)
 })

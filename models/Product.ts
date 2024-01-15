@@ -4,7 +4,7 @@ type Product = {
     price?: number;
     description: string;
     images?: Image[];
-    amount?: number;
+    quantity?: number;
     categories?: Category[];
     createdAt: Date;
     updatedAt: Date;

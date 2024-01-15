@@ -8,22 +8,20 @@ export default defineNuxtConfig({
     // Keys within public, will be also exposed to the client-side
     public: {
       // from env
-      apiUrl: process.env.API_URL,
-      loginUrl: process.env.LOGIN_URL,
-      adminUrl: process.env.ADMIN_URL,
-      projectID: process.env.PROJECT_ID,
+      apiUrl: process.env.NUXT_PUBLIC_API_URL,
+      loginUrl: process.env.NUXT_PUBLIC_LOGIN_URL,
+      adminUrl: process.env.NUXT_PUBLIC_ADMIN_URL,
+      project: process.env.NUXT_PUBLIC_PROJECT,
     }
   },
 
   modules: [
       'nuxt-icon',
-    'vue3-carousel-nuxt',
     '@pinia/nuxt',
+    'nuxt-swiper',
+    '@vee-validate/nuxt',
   ],
 
-  carousel: {
-    prefix: 'Vue'
-  },
 
   imports: {
     dirs: ['~/models','~/stores'],

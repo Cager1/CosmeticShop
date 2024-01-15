@@ -1,26 +1,32 @@
 export const useCartStore = defineStore('cart', () => {
     const cart = ref<Product[]>([])
+    const cartAnimation = ref(false)
     const totalPrice = computed(() => {
-        return cart.value.reduce((total, product) => {
-            if (product.price && product.amount) {
-                return total + product.price * product.amount
+        let price = cart.value.reduce((total, product) => {
+            if (product.price && product.quantity) {
+                return total + product.price * product.quantity
             } else {
                 return total
             }
         }, 0)
+
+        // round to 2 decimals, show as 20.00 instead of 20
+        return Math.round(price * 100) / 100
     })
 
+
     const addToCart = (product: Product) => {
-        // add amount of 1 to the product
-        // if the product is already in the cart, increase the amount
+        // add quantity of 1 to the product
+        // if the product is already in the cart, increase the quantity
         // otherwise, add the product to the cart
+        cartAnimation.value = true
         const productInCart = cart.value.find((p) => p.id === product.id)
         if (productInCart) {
             // @ts-ignore
-            productInCart.amount++
+            productInCart.quantity++
             return
         }
-        product.amount = 1
+        product.quantity = 1
         cart.value.push(product)
     }
 
@@ -35,6 +41,7 @@ export const useCartStore = defineStore('cart', () => {
     return {
         cart,
         totalPrice,
+        cartAnimation,
         addToCart,
         removeFromCart,
         clearCart,

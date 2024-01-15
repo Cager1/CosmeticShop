@@ -10,17 +10,19 @@ const props = defineProps({
   },
 })
 
+const cart = useCartStore()
+
 </script>
 
 <template>
   <section class="text-gray-600 body-font overflow-hidden">
     <div class="container px-5 py-24 mx-auto">
       <div class="md:w-4/5 mx-auto flex flex-wrap">
-        <div class="relative flex justify-center w-full md:w-fit z-10">
-          <Carousel class="max-w-[400px] sm:max-w-[300px] md:max-w-[400px]" v-if="product.images?.length" :images="product.images" />
+        <div class="relative flex justify-center w-full md:w-1/2 z-10">
+          <Carousel v-if="product.images" :images="product.images" />
         </div>
         <div class="md:w-1/2 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0">
-          <h2 class="text-sm title-font text-gray-500 tracking-widest"><span v-for="(category, index) in product.categories">{{ category.name + ' ' }} </span></h2>
+          <h2 class="text-sm title-font text-gray-500 tracking-widest"><span v-for="(category, index) in product.categories">{{ index === product.categories.length -1 ? category.name : category.name + ' - ' }}</span></h2>
           <h1 class="text-gray-900 text-3xl title-font font-medium mb-1">{{ product.name }}</h1>
           <div class="flex mb-4">
           <span class="flex items-center">
@@ -59,13 +61,7 @@ const props = defineProps({
             </a>
           </span>
           </div>
-
-
-
           <div class="leading-relaxed" v-html="product.description"></div>
-
-
-
           <div class="flex mt-6 items-center pb-5 border-b-2 border-gray-100 mb-5">
             <div class="flex">
               <span class="mr-3">Color</span>
@@ -91,8 +87,8 @@ const props = defineProps({
             </div>
           </div>
           <div class="flex">
-            <span class="title-font font-medium text-2xl text-gray-900">${{ product.price}}</span>
-            <Button class="flex ml-auto text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded" prepend-icon="mdi:basket-fill">U košaricu</Button>
+            <span class="title-font font-medium text-2xl text-gray-900">{{ product.price + project.currency}}</span>
+            <Button @click="cart.addToCart(product)" class="flex ml-auto text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded" prepend-icon="mdi:basket-fill">U košaricu</Button>
           </div>
         </div>
       </div>

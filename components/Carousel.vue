@@ -1,5 +1,10 @@
 <script lang="ts" setup>
 
+import 'swiper/css';
+
+import 'swiper/css/navigation';
+import {Navigation, Pagination} from "swiper/modules";
+
 const props = defineProps({
   images: {
     type: Array as PropType<Image[]>,
@@ -28,42 +33,24 @@ const props = defineProps({
 </script>
 
 <template>
-<!--  <VueCarousel-->
-<!--    :breakpoints="breakpoints"-->
-<!--    :settings="settings"-->
-<!--    :wrap-around="wrapAround"-->
-<!--    :items-to-show="itemsToShow">-->
-<!--    <VueSlide v-for="image in images" :key="image.id">-->
-<!--      <div class="carousel__item">-->
-<!--        <img :src="image.url" :alt="image.name" />-->
-<!--      </div>-->
-<!--    </VueSlide>-->
-<!--    <template #addons>-->
-<!--      <VueNavigation />-->
-<!--      <VuePagination />-->
-<!--    </template>-->
-<!--  </VueCarousel>-->
+  <Swiper
+      :modules="[Navigation, Pagination]"
+      :slides-per-view="1"
+      :loop="true"
+      :effect="'slide'"
+      :navigation="images.length > 1"
+      :pagination="images.length > 1"
+  >
+    <SwiperSlide class="!flex justify-center items-center" v-for="image in images" :key="image.id">
+      <div class="flex justify-center items-center">
+        <img :src="image.url" :alt="image.name" />
+      </div>
+    </SwiperSlide>
+  </Swiper>
 </template>
 
 <style scoped>
-.carousel__item {
-  width: 100%;
-  min-height: 200px;
-  color: var(--vc-clr-white);
-  font-size: 20px;
-  border-radius: 8px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.carousel__slide {
-  padding: 10px;
-}
-
-.carousel__prev,
-.carousel__next {
-  box-sizing: content-box;
-  border: 5px solid white;
+.swiper-button-next {
+  background-color: red !important;
 }
 </style>

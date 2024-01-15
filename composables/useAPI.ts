@@ -7,6 +7,7 @@ export const useApi: typeof useFetch = (request, opts?) => {
   // get current url
   const nuxtApp = useNuxtApp()
   const url = nuxtApp.$router.currentRoute.value.fullPath
+  console.log(url)
   if (process.server) {
     // server side headers
     headers = {
@@ -34,6 +35,7 @@ export const useApi: typeof useFetch = (request, opts?) => {
             fatal: true,
           })
         }
+        // if status is 429 sho
       console.log(res)
     },
     ...opts

@@ -14,15 +14,16 @@ export const useProjectStore = defineStore('project', () => {
         return project.value
     }
     const getProjectData = async (id: string) => {
-        const { data, error } = await useApi('/api/projects/' + id, {
+        const { data, error } = await useApi('/api/projects/slug/' + id, {
             params: {
-                with: ['products','categories']
+                'with[]': ['products','categories']
             }
         })
         // @ts-ignore
         if (data.value) {
             setProject(data.value as Project)
         }
+        console.log(error.value)
         if (error.value) return error.value
     }
 
