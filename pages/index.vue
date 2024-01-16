@@ -69,7 +69,7 @@ const latestProducts = computed(() => productStore.latestProducts)
   </div>
   <div>
     <div class="flex flex-col p-3 flex-wrap md:flex-row gap-16 md:gap-10 md:justify-center items-center md:items-stretch">
-      <NewProductsCard v-for="(product, index) in latestProducts" :product="product"/>
+      <NewProductsCard class="w-full sm:w-fit" v-for="(product, index) in latestProducts" :product="product"/>
     </div>
   </div>
 </template>

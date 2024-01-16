@@ -31,7 +31,7 @@ const props = defineProps({
 })
 
 const severities = {
-  active: 'm-2 inline-flex items-center justify-center rounded-xl border border-transparent bg-blue-600 px-5 py-3 font-medium text-white shadow ',
+  active: 'm-2 inline-flex items-center justify-center rounded-xl border border-transparent bg-blue-700 px-5 py-3 font-medium text-white shadow ',
   inactive: 'm-2 inline-flex items-center justify-center rounded-xl border bg-white px-5 py-3 font-medium shadow',
   info: 'focus:outline-none text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-2.5 py-2.5 mb-2',
   success: 'focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-2.5 py-2.5 mr-2 mb-2 ',

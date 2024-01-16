@@ -16,7 +16,7 @@ const project = useProjectStore().project
 
 <template>
   <div @mouseenter="optionsVisible = true" @mouseleave="optionsVisible = false">
-    <div class="border-black border relative">
+    <div class="border-black flex justify-center w-full border relative">
       <div class="w-[250px] sm:w-[300px] md:w-[400px] lg:w-[500px]">
         <Carousel v-if="product.images" :images="product.images"  />
         <div v-else class="w-full h-full flex justify-center items-center">

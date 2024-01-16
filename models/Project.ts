@@ -8,6 +8,8 @@ type Project = {
     linkedin_url: string;
     youtube_url: string;
     categories: Category[];
+    logo_id: number;
+    logo: Image;
     user_id: number;
     user: User;
     created_at: string;

@@ -65,18 +65,23 @@ const cartAnimation = computed(() => cartStore.cartAnimation)
 
 
 
-
+const scrollToTop = () => {
+  window.scrollTo({
+    top: 0,
+    behavior: 'smooth'
+  })
+}
 
 </script>
 
 <template>
   <header class="flex md:hidden flex-col gap-4 pt-3 bg-white">
-    <div class="flex justify-center items-center">
-      <Icon size="50" name="ph:flower-tulip-thin" />
-      <h1 class="text-6xl text-center">{{ project?.name}}</h1>
-    </div>
+    <NuxtLink to="/" class="flex justify-center items-center">
+      <h1 v-if="!project.logo" class="text-6xl text-center">{{ project?.name}}</h1>
+      <img v-else :src="project.logo.url" alt="logo" class="max-h-[100px]">
+    </NuxtLink>
     <div class="flex justify-center items-center gap-4">
-      <Icon size="30" class="cursor-pointer transform transition ease-in-out duration-500 hover:text-red-500 hover:delay-300" name="streamline:magnifying-glass" />
+      <Icon @click="navigateTo('/shop')" size="30" class="cursor-pointer transform transition ease-in-out duration-500 hover:text-red-500 hover:delay-300" name="streamline:magnifying-glass" />
       <div  class="relative cursor-pointer ">
         <Icon @click="navigateTo('/shopping-cart')" size="35" class="transform transition ease-in-out duration-500 hover:text-red-500 hover:delay-300"  name="tdesign:shop" />
         <div class="absolute inline-flex items-center justify-center w-5 h-5 text-xs font-bold text-white bg-red-500 rounded-full -top-2 -end-2">{{ cart.length }}</div>
@@ -88,8 +93,8 @@ const cartAnimation = computed(() => cartStore.cartAnimation)
     <div class="grid grid-cols-3 justify-center items-center">
       <div class="flex justify-start items-center">
         <NuxtLink to="/" class="flex title-font font-medium items-center mb-4 md:mb-0">
-          <Icon size="40" name="ph:flower-tulip-thin" />
-          <h1 class="text-3xl">{{ project?.name}}</h1>
+          <h1 v-if="!project.logo" class="text-6xl text-center">{{ project?.name}}</h1>
+          <img v-else :src="project.logo.url" alt="logo" class="max-h-[100px]">
         </NuxtLink>
       </div>
       <nav class=" ml-auto mr-auto flex flex-wrap items-center text-base justify-center">
@@ -155,7 +160,7 @@ const cartAnimation = computed(() => cartStore.cartAnimation)
           <nav class="list-none mb-10">
             <template v-for="(category, index) in project.categories" >
               <li v-if="!category?.parent_id">
-                <NuxtLink class="text-gray-600 hover:text-gray-800">{{ category.name }}</NuxtLink>
+                <NuxtLink :to="'/shop?filter[categories.category_id]=' + category.id" @click="scrollToTop()" class="text-gray-600 hover:text-gray-800">{{ category.name }}</NuxtLink>
               </li>
             </template>
 
@@ -181,9 +186,7 @@ const cartAnimation = computed(() => cartStore.cartAnimation)
     <div class="bg-gray-100">
       <div class="container px-5 py-6 mx-auto flex items-center sm:flex-row flex-col">
         <a class="flex title-font font-medium items-center md:justify-start justify-center text-gray-900">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-10 h-10 text-white p-2 bg-indigo-500 rounded-full" viewBox="0 0 24 24">
-            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
-          </svg>
+          <img v-if="project.logo" :src="project.logo.url" alt="url" class="max-h-[50px]">
           <span class="ml-3 text-xl">{{ project.name}}</span>
         </a>
         <p class="text-sm text-gray-500 sm:ml-6 sm:mt-0 mt-4">© 2024 {{ project.name}}

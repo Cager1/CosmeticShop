@@ -99,9 +99,9 @@ const isFiltered = (category: Category) => {
 
 <template>
   <section class="text-gray-600 body-font">
-    <div class="container px-5 py-24 mx-auto">
-      <div class="flex flex-col items-center md:block">
-        <InputText @input="search('name', searchValue)" icon="streamline:magnifying-glass" class="max-w-[250px]" v-model="searchValue" placeholder="Pretraži proizvode" />
+    <div class="container px-5 py-24 pt-5 mx-auto">
+      <div>
+        <InputText @input="search('name', searchValue)" icon="streamline:magnifying-glass" class="max-w-[250px] ml-2" v-model="searchValue" placeholder="Pretraži proizvode" />
         <div class="flex flex-wrap gap-1 mt-2">
           <Button @click="filterProducts(category)" :severity="isFiltered(category) ? 'active' : 'inactive'"  v-for="(category, index) in project.categories" :key="index" class="bg-gray-100 text-gray-900">
             {{ category.name }}
