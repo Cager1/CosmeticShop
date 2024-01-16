@@ -17,7 +17,7 @@ const optionsVisible = ref(false)
   <div class="lg:w-1/4 md:w-1/2 p-4 w-full flex flex-col justify-between" @mouseenter="optionsVisible = true" @mouseleave="optionsVisible = false">
     <div>
       <a class="block relative rounded overflow-hidden">
-        <Carousel v-if="product.images" :images="product.images"  />
+        <LazyCarousel v-if="product.images" :images="product.images"  />
         <div v-else class="w-full h-60 bg-gray-200">
           <div class="flex justify-center items-center w-full h-full">
             <Icon name="carbon:no-image" size="30" />
